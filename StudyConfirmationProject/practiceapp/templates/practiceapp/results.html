@@ -1,0 +1,8 @@
+<head>
+    <title>Последняя вкладка</title>
+    <link rel="stylesheet" type="text/css" href="style/style.css" />
+</head>
+
+<h1>{{ certificate.text }}</h1>
+
+<a href="{% url 'practiceapp:detail' certificate.id %}">Vote again?</a>

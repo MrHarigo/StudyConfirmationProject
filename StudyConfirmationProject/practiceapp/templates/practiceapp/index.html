@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список</title>
+    <link rel="stylesheet" type="text/css" href="style/style.css" />
+    <!--<link href="F:\Bootstrap\ball\css\bootstrap.min.css" rel="stylesheet" media="screen">-->
+</head>
+<body>
+    <p>Выберите нужную вам справку</p>
+{% if latest_certificate_list %}
+    <ul>
+    {% for certificate in latest_certificate_list %}
+    <li><a href="{% url 'practiceapp:detail' certificate.id %}">{{ certificate.certificate_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No certificates are available.</p>
+{% endif %}
+</body>
+</html>
