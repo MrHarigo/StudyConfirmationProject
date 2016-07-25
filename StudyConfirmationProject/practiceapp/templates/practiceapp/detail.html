@@ -23,6 +23,9 @@
     <label for="your_fathername">Отчество:</label>
     <input id="your_fathername" type="text" name="your_fathername" value="{{ current_fathername }}">
     <br/>
+    <label for="date">Дата:</label>
+    <input id ="date" type="datetime" name="date" value="{{ current_date }}">
+    <br/>
     <label for="Amount">Количество:</label>
     <input id="Amount" type="text" name="Amount" value="{{ current_amount }}">
     <br/>
@@ -34,13 +37,12 @@
 <form action="{% url 'practiceapp:vote' certificate.id %}" method="post">
 {% csrf_token %}
 {% for question in certificate.question_set.all %}
-    <input type="text" name="choice" id="question{{ forloop.counter }}" value="{{ question.id }}" />
-    <label for="question{{ forloop.counter }}">{{ question.question_text }}</label><br />
+    <label for="certificate{{ forloop.counter }}{{ forloop.counter }}">{{ question.question_text }}</label>
+    <input type="text" name="question" id="certificate{{ forloop.counter }}" value="{{ certificate.id }}" />
+    <br/>
 {% endfor %}
-<input type="submit" value="Vote" />
+<input type="submit" value="Сделать заявку" />
 </form>
-
-
 
 {% csrf_token %}
 </body>

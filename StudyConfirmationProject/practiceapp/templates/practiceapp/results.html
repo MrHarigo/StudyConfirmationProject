@@ -5,4 +5,8 @@
 
 <h1>{{ certificate.text }}</h1>
 
-<a href="{% url 'practiceapp:detail' certificate.id %}">Vote again?</a>
+{% for question in certificate.question_set.all %}
+    <li>{{ question.question_text }} -- {{ question.answer }} vote{{ question.answer|pluralize }}</li>
+{% endfor %}
+
+<a href="{% url 'practiceapp:detail' certificate.id %}">Оставить ещё одну заявку?</a>

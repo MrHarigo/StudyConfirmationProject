@@ -16,6 +16,6 @@ class Certificate(models.Model):
 class Question(models.Model):
     certificate = models.ForeignKey(Certificate)
     question_text = models.CharField(max_length=200)
-    answer = models.CharField(max_length=200)
+    answer = models.CharField(max_length=200, blank=True)
     def __str__(self):
         return self.question_text

@@ -6,4 +6,5 @@ urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
     url(r'^(?P<certificate_id>[0-9]+)/vote/$', views.vote, name='vote'),
+    url(r'^(?P<certificate_id>[0-9]+)/results/$', views.Result, name='results')
 ]
