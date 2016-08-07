@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Заявка</title>
+    <link rel="stylesheet" type="text/css" href="style/style.css" />
+</head>
+<body>
+<h1>{{ certificate.certificate_text }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+    {% if form.errors %}
+        <p style="color: red;">
+            Please correct the error{{ form.errors|pluralize }} below.
+        </p>
+    {% endif %}
+
+    <form action="" method="post">{% csrf_token %}
+        <table>
+            {{form.as_table}}
+        </table>
+        <input type="submit" value="Submit">
+    </form>
+
+<form action="{% url 'practiceapp:thanks' %}" method="post">{% csrf_token %}
+        <p> Группа: <input type="text" name="group" value="{{ group }}"></p>
+        <p>Фамилия: <input type="text" name="surname" value="{{request.user.last_name}}"></p>
+        <p>Имя: <input type="text" name="name" value="{{ request.user.first_name }}"></p>
+        <p>Отчество:<input type="text" name="father_name" value="{{ father_name }}"></p>
+        <p>Количество справок:<input type="number" name="amount" value="{{ amount }}"></p>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

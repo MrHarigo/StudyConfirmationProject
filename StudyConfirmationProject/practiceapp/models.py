@@ -1,4 +1,6 @@
 from django.db import models
+from django.forms import ModelForm
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -19,3 +21,15 @@ class Question(models.Model):
     answer = models.CharField(max_length=200, blank=True)
     def __str__(self):
         return self.question_text
+
+class CertificateForm(ModelForm):
+    class Meta:
+        model = Certificate
+        fields = '__all__'
+
+class MySiteProfile(models.Model):
+    user = models.ForeignKey(User, unique=True)
+
+    group = models.CharField(max_length=100, blank=True)
+    status = models.CharField(max_length=100, blank=True)
+    lucky_number = models.IntegerField()

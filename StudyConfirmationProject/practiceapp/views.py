@@ -7,11 +7,11 @@ from django.template import RequestContext, loader
 from django.core.urlresolvers import reverse
 from django.contrib.auth.forms import authenticate
 from django import forms
-from django.contrib.auth import login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
 from django.shortcuts import render
-
+from django.core.mail import send_mail
+from practiceapp.forms import ContactForm
 
 class LoginFormView(FormView):
     form_class = AuthenticationForm
@@ -41,29 +41,28 @@ class IndexView(generic.ListView):
 
 class DetailView(generic.DetailView):
     model = Certificate
-    template_name = 'practiceapp/detail.html'
+    template_name = 'practiceapp/contact_form.html'
 
-class Results(generic.DetailView):
-    template_name = 'practiceapp/results.html'
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            send_mail(
+                cd['group'],
+                cd['surname'],
+                cd['name'],
+                cd['father_name'],
+                cd['amount'],
+                ['damir.serazetdinow@yandex.ru'],
+            )
+            return HttpResponseRedirect('/practiceapp/thanks/')
+        else:
+            form = ContactForm(
+                initial={'name': request.user.first_name,
+                         'surname': request.user.last_name,}
+            )
+        return render_to_response('practiceapp/contact_form.html', {'form': form})
 
-
-def vote(request, certificate_id):
-    p = get_object_or_404(Certificate, pk=certificate_id)
-    try:
-        typed_answer = p.question_set.get(pk=request.POST['question'])
-    except (KeyError, Certificate.DoesNotExist):
-        # Redisplay the question voting form.
-        return render(request, 'practiceapp/detail.html', {
-            'certificate': p,
-            'error_message': "You didn't select a choice.",
-        })
-    else:
-        typed_answer.answer = typed_answer,
-        typed_answer.save(),
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
-        return HttpResponseRedirect(reverse('practiceapp:results', args=(p.id,)))
-
-
-
+def thanks(request):
+    return render_to_response('practiceapp/thanks_form.html')

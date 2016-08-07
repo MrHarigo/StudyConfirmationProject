@@ -11,7 +11,7 @@
 {% if latest_certificate_list %}
     <ul>
     {% for certificate in latest_certificate_list %}
-    <li><a href="{% url 'practiceapp:detail' certificate.id %}">{{ certificate.certificate_text }}</a></li>
+    <li><a href="{% url 'practiceapp:contact' certificate.id %}">{{ certificate.certificate_text }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
