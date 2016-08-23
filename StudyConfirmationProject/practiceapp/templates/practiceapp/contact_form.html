@@ -21,7 +21,11 @@
 <p>Имя:{{ request.user.first_name }}</p>
 <p>Отчество:{{ request.user.mysiteprofile.father_name }}</p>
 <form action="{% url 'practiceapp:thanks' %}" method="post">{% csrf_token %}
-    <p>Количество справок:<input type="number" name="amount" value="{{ amount }}"></p>
+    <label>
+        Количество справок:
+        <input type="number" name="amount" value="{{ amount }}">
+    </label>
+    <br>
     <input type="submit" value="Submit">
 </form>
 </body>

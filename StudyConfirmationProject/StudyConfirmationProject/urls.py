@@ -16,13 +16,13 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth.views import login, logout
-#from practiceapp.views import logout
+#from practiceapp.views import logout, login
 
 urlpatterns = [
     url(r'^practiceapp/', include('practiceapp.urls', namespace="practiceapp")),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', login),
-    url(r'^accounts/login/$',  login),
-    url(r'^accounts/logout/$', logout),
-    url(r'^accounts/profile/$', include('practiceapp.urls'))
+    url(r'^login/$',  login),
+    url(r'^logout/$', logout),
+    url(r'^accounts/profile/', include('practiceapp.urls'))
 ]

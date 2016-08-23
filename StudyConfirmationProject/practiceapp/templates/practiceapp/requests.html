@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Поданные заявки</title>
+</head>
+<body>
+    <h1><strong>Здесь вы, сотрудник деканата, видите поданные студентами заявки на справки.</strong></h1>
+{% if latest_requests_list %}
+    <ul>
+    {% for request in latest_requests_list %}
+    <li>{{ request.certificate }}   {{ request.group }}     {{ request.surname }}     {{ request.name }}     {{ request.fathername }}     {{ request.amount }}     {{ request.pub_date }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Нет заявок.</p>
+{% endif %}
+</body>
+</html>

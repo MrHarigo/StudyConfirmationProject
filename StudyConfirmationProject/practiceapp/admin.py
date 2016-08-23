@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Certificate, Question
+from .models import Certificate, Request
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from .models import MySiteProfile
@@ -20,12 +20,5 @@ class UserAdmin(UserAdmin):
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 
-class QuestionInLine(admin.TabularInline):
-    model = Question
-    extra = 6
-
-
-class CertificateAdmin(admin.ModelAdmin):
-    inlines = [QuestionInLine]
-
-admin.site.register(Certificate, CertificateAdmin)
+admin.site.register(Certificate)
+admin.site.register(Request)
