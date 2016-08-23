@@ -16,20 +16,13 @@
         </p>
     {% endif %}
 
-    <form action="" method="post">{% csrf_token %}
-        <table>
-            {{form.as_table}}
-        </table>
-        <input type="submit" value="Submit">
-    </form>
-
+<p>Группа:{{ request.user.mysiteprofile.group}}</p>
+<p>Фамилия:{{ request.user.last_name }}</p>
+<p>Имя:{{ request.user.first_name }}</p>
+<p>Отчество:{{ request.user.mysiteprofile.father_name }}</p>
 <form action="{% url 'practiceapp:thanks' %}" method="post">{% csrf_token %}
-        <p> Группа: <input type="text" name="group" value="{{ group }}"></p>
-        <p>Фамилия: <input type="text" name="surname" value="{{request.user.last_name}}"></p>
-        <p>Имя: <input type="text" name="name" value="{{ request.user.first_name }}"></p>
-        <p>Отчество:<input type="text" name="father_name" value="{{ father_name }}"></p>
-        <p>Количество справок:<input type="number" name="amount" value="{{ amount }}"></p>
-        <input type="submit" value="Submit">
-    </form>
+    <p>Количество справок:<input type="number" name="amount" value="{{ amount }}"></p>
+    <input type="submit" value="Submit">
+</form>
 </body>
 </html>

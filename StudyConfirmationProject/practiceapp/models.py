@@ -28,8 +28,13 @@ class CertificateForm(ModelForm):
         fields = '__all__'
 
 class MySiteProfile(models.Model):
-    user = models.ForeignKey(User, unique=True)
+    user = models.OneToOneField(User)
+    father_name = models.CharField(max_length=20)
+    group = models.CharField(max_length=20)
 
-    group = models.CharField(max_length=100, blank=True)
-    status = models.CharField(max_length=100, blank=True)
-    lucky_number = models.IntegerField()
+    def __unicode__(self):
+        return self.user
+
+    class Meta:
+        verbose_name = 'Профиль'
+        verbose_name_plural = 'Профили'
